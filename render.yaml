@@ -1,0 +1,28 @@
+# This file tells Render how to build and serve your application.
+# You can use this as a "Blueprint" to create a new "Static Site" on Render.
+
+services:
+  - type: web
+    name: mindtrail
+    env: static
+    # The branch to deploy from
+    branch: main
+    # Build command
+    buildCommand: "yarn && yarn build"
+    # The directory where the built files are located
+    publishDir: dist
+    # Environment variables can be set in the Render dashboard
+    # Make sure to set VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY, and VITE_SENTRY_DSN
+    # SENTRY_ORG, SENTRY_PROJECT, and SENTRY_AUTH_TOKEN should also be set for build-time source map uploads.
+    buildFilter:
+      paths:
+        - "src/**"
+        - "public/**"
+        - "package.json"
+        - "yarn.lock"
+        - "vite.config.ts"
+        - "tailwind.config.js"
+        - "postcss.config.js"
+        - "index.html"
+      ignoredPaths:
+        - "*.md"
